@@ -1,3 +1,5 @@
 .vscode
 venv
 terraform-key.json
+terraform.tfstate
+terraform.tfstate.backup
