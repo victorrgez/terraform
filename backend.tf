@@ -1,6 +1,8 @@
+#This bucket needs to be created before running `terraform init`
+
 terraform {
   backend "gcs" {
-    bucket = "terraform-backend-victorrgez"
-    prefix = "terraform1"
+    bucket = "terraform-victorrgez"
+    prefix = "terraform-trial1"
   }
 }
