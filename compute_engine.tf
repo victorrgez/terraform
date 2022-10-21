@@ -23,17 +23,20 @@ resource "google_compute_instance" "terraform-vm" {
     }
   }
 
-  // Local SSD disk
+  /* Local SSD disk
   scratch_disk {
     interface = "SCSI"
+    size = "10"
   }
+  */
 
   network_interface {
-    network = "terraform-network-with-subnets"
+    network = google_compute_network.terraform-network-with-subnets.name
 
     access_config {
       // Ephemeral public IP
       network_tier="STANDARD"
+      nat_ip = google_compute_address.terraform-static-ip.address
     }
   }
 
@@ -43,4 +46,11 @@ resource "google_compute_instance" "terraform-vm" {
     # email  = google_service_account.default.email -> If not specified, uses Compute Engine's default one
     scopes = ["cloud-platform"]
   }
+}
+
+resource "google_compute_address" "terraform-static-ip"{
+    name = "terraform-static-ip"
+    address_type = "EXTERNAL"
+    region = "europe-west1"
+    network_tier = "STANDARD"
 }
