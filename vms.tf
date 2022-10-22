@@ -30,6 +30,11 @@ resource "google_compute_instance" "terraform-vm" {
   }
   */
 
+  attached_disk {
+    mode = "READ_WRITE"
+    source = google_compute_disk.terraform-additional-persistent-disk.name
+  }
+
   network_interface {
     network = google_compute_network.terraform-network-with-subnets.name
 
@@ -40,17 +45,10 @@ resource "google_compute_instance" "terraform-vm" {
     }
   }
 
-
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     # email  = google_service_account.default.email -> If not specified, uses Compute Engine's default one
     scopes = ["cloud-platform"]
   }
-}
-
-resource "google_compute_address" "terraform-static-ip"{
-    name = "terraform-static-ip"
-    address_type = "EXTERNAL"
-    region = "europe-west1"
-    network_tier = "STANDARD"
+  
 }
