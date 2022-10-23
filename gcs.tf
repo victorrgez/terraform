@@ -1,6 +1,6 @@
-resource "google_storage_bucket" "terraform-trial-europe-west-1" {
-  name          = "terraform-trial-europe-west-1"
-  location      = "europe-west1"
+resource "google_storage_bucket" "terraform-trial-europe-west1-1" {
+  name          = "terraform-trial-europe-west1-1"
+  location      = locals.region
   force_destroy = true
   storage_class = "STANDARD"
   uniform_bucket_level_access = true
@@ -9,9 +9,9 @@ resource "google_storage_bucket" "terraform-trial-europe-west-1" {
   }
 }
 
-resource "google_storage_bucket" "terraform-trial-europe-west-2" {
-  name          = "terraform-trial-europe-west-2"
-  location      = "europe-west1"
+resource "google_storage_bucket" "terraform-trial-europe-west1-2" {
+  name          = "terraform-trial-europe-west1-2"
+  location      = locals.region
   force_destroy = false
   storage_class = "COLDLINE"
   uniform_bucket_level_access = false

@@ -3,12 +3,8 @@
 terraform {
 
   backend "gcs" {
-    bucket = "terraform-victorrgez"
+    bucket = locals.backend_bucket
     prefix = "terraform-trial1"
-
-    workspaces {
-      name = "learning-terraform"
-    }
 
   }
 
