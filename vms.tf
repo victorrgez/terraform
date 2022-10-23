@@ -1,7 +1,7 @@
 resource "google_compute_instance" "terraform-vm" {
   name         = "terraform-vm"
-  machine_type = locals.default_machine_type
-  zone         = locals.zone
+  machine_type = local.default_machine_type
+  zone         = local.zone
 
   tags = ["ingress5000", "ingress8000"]
   allow_stopping_for_update = true
@@ -16,7 +16,7 @@ resource "google_compute_instance" "terraform-vm" {
     initialize_params {
       image = "ubuntu-1804-bionic-v20221018"
       size = "50"
-      type = locals.default_disk_type
+      type = local.default_disk_type
       labels = {
         created_by = "terraform"
       }

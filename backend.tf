@@ -3,7 +3,7 @@
 terraform {
 
   backend "gcs" {
-    bucket = locals.backend_bucket
+    bucket = "terraform-victorrgez1"
     prefix = "terraform-trial1"
 
   }

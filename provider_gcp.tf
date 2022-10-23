@@ -2,7 +2,7 @@ provider "google" {
 
   credentials = file("terraform-key.json")
 
-  project = locals.project_id
-  region  = locals.region
-  zone    = locals.zone
+  project = local.project_id
+  region  = local.region
+  zone    = local.zone
 }

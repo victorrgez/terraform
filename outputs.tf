@@ -3,7 +3,7 @@ output "attached_disk"{
 }
 
 output "backend_bucket" {
-    value = locals.backend_bucket # Resource not created by Terraform
+    value = local.backend_bucket # Resource not created by Terraform
 }
 
 output "bucket" {
@@ -19,11 +19,11 @@ output "ip" {
 }
 
 output "project_id" {
-    value = locals.project_id
+    value = local.project_id
 }
 
 output "region" {
-    value = locals.region
+    value = local.region
 }
 
 output "vm_name" {
@@ -39,5 +39,5 @@ output "workspace" {
 }
 
 output "zone" {
-    value = locals.zone
+    value = local.zone
 }
