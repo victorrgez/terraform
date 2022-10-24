@@ -2,16 +2,14 @@ output "attached_disk"{
     value = google_compute_disk.terraform-additional-persistent-disk.name
 }
 
-output "backend_bucket" {
-    value = local.backend_bucket # Resource not created by Terraform
-}
-
 output "bucket" {
-    value = google_storage_bucket.terraform-trial-europe-west-1.name
+    value = google_storage_bucket.terraform-trial-europe-west1-1.name
+    description = "STANDARD bucket. No costs for accessing objects"
 }
 
 output "extra_bucket"{
-    value = google_storage_bucket.terraform-trial-europe-west-2.name
+    value = google_storage_bucket.terraform-trial-europe-west1-2.name
+    description "COLDLINE bucket. Lower costs for storing objects"
 }
 
 output "ip" {
@@ -20,10 +18,12 @@ output "ip" {
 
 output "project_id" {
     value = local.project_id
+    description = "the project_id will vary in each sandbox"
 }
 
 output "region" {
     value = local.region
+    description = "all resources will be created in this region"
 }
 
 output "vm_name" {
@@ -40,4 +40,5 @@ output "workspace" {
 
 output "zone" {
     value = local.zone
+    description = "all resources will be created in this zone"
 }

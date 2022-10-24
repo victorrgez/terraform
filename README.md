@@ -8,5 +8,4 @@ To Do:
 - [ ] See more options for outputs.tf
 - [ ] How to allow http by default VM instance
 - [ ] Create subnets manually
-- [ ] Set variables for region, zone and project ID
-- [ ] Backend workspace does not appear when outputting terraform.worspace
+- [ ] How to create/choose workspace
