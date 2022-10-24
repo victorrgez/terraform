@@ -5,8 +5,14 @@ resource "google_compute_instance" "terraform-vm" {
 
   tags = ["ingress5000", "ingress8000"]
   allow_stopping_for_update = true
-
   desired_status = "RUNNING"
+
+  deletion_protection = true
+  /*
+  In order to delete this machine, it is needed to first set `deletion_protection` to false and `terraform apply`,
+  followed by count=0 and `terraform apply`. It is a two-step process.
+  The second step can be replaced by `terraform destroy -target google_compute_instance.terraform-vm` as well
+  */
 
   labels = {
     created_by = "terraform"

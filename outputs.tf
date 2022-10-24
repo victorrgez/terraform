@@ -1,4 +1,4 @@
-output "attached_disk"{
+output "attached_disk" {
     value = google_compute_disk.terraform-additional-persistent-disk.name
 }
 
@@ -7,9 +7,9 @@ output "bucket" {
     description = "STANDARD bucket. No costs for accessing objects"
 }
 
-output "extra_bucket"{
+output "extra_bucket" {
     value = google_storage_bucket.terraform-trial-europe-west1-2.name
-    description "COLDLINE bucket. Lower costs for storing objects"
+    description = "COLDLINE bucket. Lower costs for storing objects"
 }
 
 output "ip" {

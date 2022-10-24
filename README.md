@@ -9,3 +9,6 @@ To Do:
 - [ ] How to allow http by default VM instance
 - [ ] Create subnets manually
 - [ ] How to create/choose workspace
+- [ ] What is exactly terraform module
+- [ ] Difference between variables and locals
+- [ ] Use variable as list (for example subnet ips) and decide which one you want to assign
