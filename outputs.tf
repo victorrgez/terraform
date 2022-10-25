@@ -1,3 +1,7 @@
+output "allowed_regions" {
+    value = var.allowed_regions
+}
+
 output "attached_disk" {
     value = google_compute_disk.terraform-additional-persistent-disk.name
 }
