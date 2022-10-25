@@ -34,10 +34,6 @@ output "vm_name" {
     value = google_compute_instance.terraform-vm.name
 }
 
-output "vpc_in_use" {
-    value = google_compute_network.terraform-network-with-subnets.name
-}
-
 output "workspace" {
     value = terraform.workspace
 }

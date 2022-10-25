@@ -42,7 +42,9 @@ resource "google_compute_instance" "terraform-vm" {
   }
 
   network_interface {
-    network = google_compute_network.terraform-network-with-subnets.name
+    network = google_compute_network.terraform-network-array-lookup.name
+    subnetwork = google_compute_subnetwork.array-lookup-subnets[0].name
+    # Subnet in europe-west1
 
     access_config {
       // Ephemeral public IP
