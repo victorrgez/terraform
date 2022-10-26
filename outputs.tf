@@ -30,8 +30,14 @@ output "region" {
     description = "all resources will be created in this region"
 }
 
-output "vm_name" {
+output "vm_with_protection_enabled" {
     value = google_compute_instance.terraform-vm.name
+    /* We need to manually delete this precondition before being able to disable
+    the deletion_protection */
+    precondition {
+        condition = google_compute_instance.terraform-vm.deletion_protection
+        error_message = "The VM is unprotected"
+    }
 }
 
 output "workspace" {

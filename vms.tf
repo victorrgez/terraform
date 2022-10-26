@@ -19,16 +19,8 @@ resource "google_compute_instance" "terraform-vm" {
   }
 
   boot_disk {
-    initialize_params {
-      image = "ubuntu-1804-bionic-v20221018"
-      size = "50"
-      type = local.default_disk_type
-      labels = {
-        created_by = "terraform"
-      }
-    }
+    source = google_compute_disk.boot-disk-vm.name
   }
-
   /* Local SSD disk
   scratch_disk {
     interface = "SCSI"
