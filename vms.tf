@@ -1,6 +1,6 @@
 resource "google_compute_instance" "terraform-vm" {
   name         = "terraform-vm"
-  machine_type = local.default_machine_type
+  machine_type = local.default_vars.default_machine_type
   zone         = local.zone
 
   tags = ["ingress5000", "ingress8000"]
