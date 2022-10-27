@@ -1,5 +1,5 @@
 output "allowed_regions" {
-    value = var.allowed_regions
+    value = local.allowed_regions
 }
 
 output "attached_disk" {

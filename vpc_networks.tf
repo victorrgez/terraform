@@ -11,19 +11,19 @@ resource "google_compute_network" "terraform-network-for-each" {
 }
 
 resource "google_compute_subnetwork" "for-each-subnets"{
-  for_each       = toset(var.allowed_regions)
+  for_each       = toset(local.allowed_regions)
   /*
   `each.value` is each of the names (regions) inside our variable
-  how to get index for each region? ---> index(var.allowed_regions, each.value)
+  how to get index for each region? ---> index(local.allowed_regions, each.value)
   we need this index to iterate through another list variable
   */
   name          = "subnet-for-each-${each.value}"
-  ip_cidr_range = var.vpc_internal_ip_ranges.primary[index(var.allowed_regions, each.value)]
+  ip_cidr_range = var.vpc_internal_ip_ranges.primary[index(local.allowed_regions, each.value)]
   region        = each.value
   network       = google_compute_network.terraform-network-for-each.id
   secondary_ip_range {
     range_name    = "secondary-range-for-each${each.value}"
-    ip_cidr_range = var.vpc_internal_ip_ranges.secondary[index(var.allowed_regions, each.value)]
+    ip_cidr_range = var.vpc_internal_ip_ranges.secondary[index(local.allowed_regions, each.value)]
   }
   private_ip_google_access = true
 }
@@ -38,19 +38,19 @@ resource "google_compute_network" "terraform-network-array-lookup" {
 }
 
 resource "google_compute_subnetwork" "array-lookup-subnets"{
-  count = length(var.allowed_regions)
+  count = length(local.allowed_regions)
   /*
   count = length(variable) will create behind the scenes a for loop
   `count.index` --> will give us the index for iterating both over our variable
   and also over a different list variable
   */
 
-  name          = "subnet-lookup-${var.allowed_regions[count.index]}"
+  name          = "subnet-lookup-${local.allowed_regions[count.index]}"
   ip_cidr_range = var.vpc_internal_ip_ranges.primary[count.index]
-  region        = var.allowed_regions[count.index]
+  region        = local.allowed_regions[count.index]
   network       = google_compute_network.terraform-network-array-lookup.id
   secondary_ip_range {
-    range_name    = "secondary-range-lookup-${var.allowed_regions[count.index]}"
+    range_name    = "secondary-range-lookup-${local.allowed_regions[count.index]}"
     ip_cidr_range = var.vpc_internal_ip_ranges.secondary[count.index]
   }
   private_ip_google_access = true

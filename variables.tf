@@ -2,11 +2,12 @@ variable "default_vars" {
     type = map(string)
     default = {
         "default_disk_type" = "pd-standard"
-        "default_disk_size" = "100"
+        "default_disk_size" = 100
         "default_machine_type" = "n1-standard-1"
     }
 }
 
+# all allowed_regions in the sandbox environment:
 variable "allowed_regions" {
     type = list(string)
     default = [

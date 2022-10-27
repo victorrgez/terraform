@@ -4,6 +4,7 @@ resource "google_compute_disk" "boot-disk-vm" {
     zone = local.zone
     size = 50
     image = local.default_vars.default_ubuntu_image
+    labels = {
         created_by = "terraform"
     }
 }
