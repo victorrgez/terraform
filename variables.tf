@@ -8,7 +8,7 @@ variable "default_vars" {
 }
 
 # all allowed_regions in the sandbox environment:
-variable "allowed_regions" {
+variable "available_regions" {
     type = list(string)
     default = [
         "europe-west1",

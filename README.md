@@ -3,14 +3,13 @@ Learning Terraform with A Cloud Guru sandboxes in GCP
 
 To Do:
 
-- [ ] How to delete firewalls in use when deleting VPC
-- [ ] How to allow http by default VM instance
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
 - [ ] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
 
 Done:
 - [X] See more options for outputs.tf
+- [X] Create firewall rules to allow HTTP, 5000, 8000, etc
 - [X] Move boot disk from VM to persistent_disks.tf
 - [X] What happens when two merge two map(string) variables with the same name in both?
 - [X] Create subnets manually

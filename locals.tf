@@ -14,10 +14,10 @@ locals {
     })
 
     /*
-    In variables.tf, we define all the allowed_regions by the Sandbox environment.
+    In variables.tf, we define all the available_regions in the Sandbox environment.
     In locals.tf, we filter them to use only the ones in USA and Europe
     */
-    allowed_regions = [ for region in var.allowed_regions : region if startswith(region, "us") || startswith (region, "eu") ]
+    allowed_regions = [ for region in var.available_regions : region if startswith(region, "us") || startswith (region, "eu") ]
     project_id = "<PROJECT_ID>"
     region = "europe-west1" 
     zone = "europe-west1-b"

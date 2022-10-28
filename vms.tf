@@ -3,7 +3,7 @@ resource "google_compute_instance" "terraform-vm" {
   machine_type = local.default_vars.default_machine_type
   zone         = local.zone
 
-  tags = ["ingress5000", "ingress8000"]
+  tags = ["http-server", "https-server", "ingress5000", "ingress8000", "allow-ssh"]
   allow_stopping_for_update = true
   desired_status = "RUNNING"
 
@@ -34,8 +34,8 @@ resource "google_compute_instance" "terraform-vm" {
   }
 
   network_interface {
-    network = google_compute_network.terraform-network-array-lookup.name
-    subnetwork = google_compute_subnetwork.array-lookup-subnets[0].name
+    network = google_compute_network.terraform-network-for-each.name
+    subnetwork = google_compute_subnetwork.for-each-subnets["europe-west1"].name
     # Subnet in europe-west1
 
     access_config {
