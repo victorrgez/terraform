@@ -6,8 +6,13 @@ To Do:
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
 - [ ] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
+- [ ] Created BigQuery Dataset/Tables
+- [ ] Do we need to enable manually cloud resource manager?
+- [ ] We cannot give roles to the SA we just created right?
 
 Done:
+- [X] Enable APIs
+- [X] Create Service Account
 - [X] See more options for outputs.tf
 - [X] Create firewall rules to allow HTTP, 5000, 8000, etc
 - [X] Move boot disk from VM to persistent_disks.tf
