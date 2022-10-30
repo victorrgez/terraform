@@ -22,6 +22,7 @@ resource "google_project_iam_binding" "iam-bigquery-job-user" {
 
   members = [
     "serviceAccount:${google_service_account.terraform-sa.account_id}@${local.project_id}.iam.gserviceaccount.com",
+    "serviceAccount:${google_service_account.terraform-sa.email}"
   ]
 
   condition {

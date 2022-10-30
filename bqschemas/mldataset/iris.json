@@ -1,0 +1,27 @@
+[
+    {
+        "name": "sepal_length",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "sepal_width",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "petal_length",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "petal_width",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "variety",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }
+]

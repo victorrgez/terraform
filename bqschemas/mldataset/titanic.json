@@ -1,0 +1,62 @@
+[
+    {
+        "name": "PassengerId",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Survived",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Pclass",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Name",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Sex",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Age",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "SibSp",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Parch",
+        "type": "INTEGER",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Ticket",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Fare",
+        "type": "FLOAT",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Cabin",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    },
+    {
+        "name": "Embarked",
+        "type": "STRING",
+        "mode": "NULLABLE"
+    }
+]
