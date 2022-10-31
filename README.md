@@ -7,12 +7,14 @@ since they both need to be active for Terraform to know if they are active or no
 
 To Do:
 
-- [ ] Create load jobs and make sure they don't repeat
+
+- [ ] icmp firewall
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
 - [ ] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
 
 Done:
+
 - [X] Enable APIs
 - [X] Create Service Account
 - [X] See more options for outputs.tf
@@ -24,4 +26,6 @@ Done:
 - [X] How to use conditionals
 - [X] Use variable as list (for example subnet ips) and decide which one you want to assign
 - [X] Create BigQuery Dataset/Tables
+- [X] Import CSV data into GCS with Terraform
+- [X] Create load jobs to BigQuery and make sure they don't repeat each time
 - [X] ....
