@@ -93,3 +93,19 @@ resource "google_compute_firewall" "allow-ssh" {
   source_ranges = ["35.235.240.0/20", "0.0.0.0/0"]
   target_tags = ["allow-ssh"]
 }
+
+resource "google_compute_firewall" "allow-icmp" {
+  project     = local.project_id
+  name        = "allow-icmp"
+  network     = google_compute_network.terraform-network-for-each.name
+  description = "Allow pinging the machines"
+  
+  allow {
+    protocol  = "icmp"
+  }
+
+  direction   = "INGRESS"
+  priority = 1000
+  source_ranges = ["0.0.0.0/0"]
+  target_tags = ["allow-icmp"]
+}

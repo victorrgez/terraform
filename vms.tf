@@ -3,7 +3,7 @@ resource "google_compute_instance" "terraform-vm" {
   machine_type = local.default_vars.default_machine_type
   zone         = local.zone
 
-  tags = ["http-server", "https-server", "ingress5000", "ingress8000", "allow-ssh"]
+  tags = ["http-server", "https-server", "ingress5000", "ingress8000", "allow-ssh", "allow-icmp"]
   allow_stopping_for_update = true
   desired_status = "RUNNING"
 
