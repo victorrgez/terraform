@@ -7,7 +7,6 @@ since they both need to be active for Terraform to know if they are active or no
 
 To Do:
 
-
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
 - [ ] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
@@ -18,6 +17,7 @@ Done:
 - [X] Create Service Account
 - [X] See more options for outputs.tf
 - [X] Create firewall rules to allow HTTP, 5000, 8000, etc
+- [X] Start-up script
 - [X] Move boot disk from VM to persistent_disks.tf
 - [X] What happens when two merge two map(string) variables with the same name in both?
 - [X] Create subnets manually

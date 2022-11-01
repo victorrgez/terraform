@@ -26,12 +26,12 @@ Upload local data to GCS so that it can be imported with a Load Job in bigquery.
 
 resource "google_storage_bucket_object" "irisdata" {
   name   = "iris.csv"
-  source = "bqdata/iris.csv"
+  source = "data/bqdata/iris.csv"
   bucket = google_storage_bucket.terraform-trial-europe-west1-1.name
 }
 
 resource "google_storage_bucket_object" "titanicdata" {
   name   = "titanic.csv"
-  source = "bqdata/titanic.csv"
+  source = "data/bqdata/titanic.csv"
   bucket = google_storage_bucket.terraform-trial-europe-west1-1.name
 }

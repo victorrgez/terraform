@@ -6,7 +6,7 @@ resource "google_compute_instance" "terraform-vm" {
   tags = ["http-server", "https-server", "ingress5000", "ingress8000", "allow-ssh", "allow-icmp"]
   allow_stopping_for_update = true
   desired_status = "RUNNING"
-
+  metadata_startup_script = file("data/scripts/start-up.sh")
   deletion_protection = true
   /*
   In order to delete this machine, it is needed to first set `deletion_protection` to false and `terraform apply`,
