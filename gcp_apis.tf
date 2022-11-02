@@ -8,3 +8,14 @@ resource "google_project_service" "iam-api" {
   disable_on_destroy = true
   disable_dependent_services = true
 }
+
+resource "google_project_service" "artifact-registry-api" {
+  service = "artifactregistry.googleapis.com"
+  # Needed for being able to store Docker images
+  timeouts {
+    create = "1m"
+    update = "1m"
+  }
+  disable_on_destroy = true
+  disable_dependent_services = true
+}

@@ -1,17 +1,22 @@
+
+
 resource "google_compute_instance" "terraform-vm" {
   name         = "terraform-vm"
   machine_type = local.default_vars.default_machine_type
   zone         = local.zone
+  # Needs the repository to be created for the start-up script to be run succesfully:
+  depends_on = [google_artifact_registry_repository.docker-repository]
 
   tags = ["http-server", "https-server", "ingress5000", "ingress8000", "allow-ssh", "allow-icmp"]
   allow_stopping_for_update = true
   desired_status = "RUNNING"
+  # The start-up script may fail if the Artifact Registry was enabled recently
   metadata_startup_script = file("data/scripts/start-up.sh")
-  deletion_protection = true
+  deletion_protection = local.deletion_protection
   /*
   In order to delete this machine, it is needed to first set `deletion_protection` to false and `terraform apply`,
-  followed by count=0 and `terraform apply`. It is a two-step process.
-  The second step can be replaced by `terraform destroy -target google_compute_instance.terraform-vm` as well
+  followed by the actual deletion. It is a two-step process.
+  The second step can be replaced by count=0 or `terraform destroy -target google_compute_instance.terraform-vm` as well
   */
 
   labels = {

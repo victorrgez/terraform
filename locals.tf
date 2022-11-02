@@ -21,4 +21,5 @@ locals {
     project_id = "<PROJECT_ID>"
     region = "europe-west1" 
     zone = "europe-west1-b"
+    deletion_protection = true
 }

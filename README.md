@@ -7,9 +7,13 @@ since they both need to be active for Terraform to know if they are active or no
 
 To Do:
 
+- [ ] Copy image from Dockerhub to Container Registry inside start-up script
+- [ ] Create instance template and Managed Instance Group (group manager, target pool)
+- [ ] Set up Load Balancer (autoscaler)
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
 - [ ] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
+- [ ] Data sources
 
 Done:
 
