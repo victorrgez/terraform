@@ -1,4 +1,5 @@
 #!/bin/bash
+# Run by the initial VM that pushes the DockerHub image to Artifact Registry
 echo "running start-up script"
 apt-get update -y
 apt-get upgrade -y

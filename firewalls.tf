@@ -53,8 +53,7 @@ resource "google_compute_firewall" "ingress5000" {
 
   direction   = "INGRESS"
   priority = 1000
-  source_ranges = flatten([var.vpc_internal_ip_ranges.primary,
-                           var.vpc_internal_ip_ranges.secondary])
+  source_ranges = ["0.0.0.0/0"]
   target_tags = ["ingress5000"]
 }
 
@@ -71,8 +70,7 @@ resource "google_compute_firewall" "ingress8000" {
 
   direction   = "INGRESS"
   priority = 1000
-  source_ranges = flatten([var.vpc_internal_ip_ranges.primary,
-                           var.vpc_internal_ip_ranges.secondary])
+  source_ranges = ["0.0.0.0/0"]
   target_tags = ["ingress8000"]
 }
 
