@@ -1,5 +1,5 @@
 #!/bin/bash
-# Run by the MiG VMs to deploy the image
+# Deploys the image inside a VM
 echo "running start-up script"
 apt-get update -y
 apt-get upgrade -y

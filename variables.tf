@@ -38,10 +38,3 @@ variable "vpc_internal_ip_ranges" {
         ]
     }
 }
-
-variable "docker_image" {
-    type = string
-    default = "europe-west1-docker.pkg.dev/playground-s-11-5f5cc796/docker-repository/learningcicd:1"
-    
-    # Image used in Instance Groups
-}

@@ -22,4 +22,6 @@ locals {
     region = "europe-west1" 
     zone = "europe-west1-b"
     deletion_protection = true
+    
+    docker_image = "${local.region}-docker.pkg.dev/${local.project_id}/docker-repository/learningcicd:1"
 }
