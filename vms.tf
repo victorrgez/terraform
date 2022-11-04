@@ -1,8 +1,9 @@
 /*
 INDEX:
-terraform-vm --> Pulls image from dockerhub and pushes it to Artifact Registry on the start-up script
-docker-vm --> Pulls and deploys image from Artifact Registry on the start-up script. Commented out as this is now done with Managed Instance Group.
-docker-optimised-vm --> Uses a Container-Optimised OS and deploys the image on port 5000. Commented out as this is now done with Managed Instance Group.
+1. terraform-vm --> Pulls image from dockerhub and pushes it to Artifact Registry on the start-up script
+2. docker-vm --> Pulls and deploys image from Artifact Registry on the start-up script. Commented out as this is now done with Managed Instance Group.
+3. docker-optimised-vm --> Uses a Container-Optimised OS and deploys the image on port 5000. Commented out as this is now done with Managed Instance Group.
+4. Instance template --> Used by the Manager Instance Group
 */
 
 resource "google_compute_instance" "terraform-vm" {
@@ -124,7 +125,7 @@ resource "google_compute_instance" "docker-optimised-vm" {
 
   boot_disk {
     initialize_params {
-      image = "cos-cloud/cos-stable-101-17162-40-20"  # Container-Optimised OS
+      image = local.default_vars.default_cos_image  # Container-Optimised OS
     }
   }
 
@@ -162,3 +163,64 @@ resource "google_compute_instance" "docker-optimised-vm" {
   
 }
 */
+
+resource "google_compute_instance_template" "mig-template" {
+  name        = "mig-template"
+  description = "Exposes Artifact Registry image on port 5000. Used to create a Managed Instance Group"
+
+  tags = ["http-server", "https-server", "ingress5000", "ingress8000", "allow-ssh", "allow-icmp"]
+
+  labels = {
+    created_by = "terraform"
+  }
+
+  instance_description = "description assigned to instances"
+  machine_type         = local.default_vars.default_machine_type
+  can_ip_forward       = false
+
+  scheduling {
+    automatic_restart   = true
+    on_host_maintenance = "MIGRATE"
+  }
+
+  disk {
+    boot = true
+    auto_delete = true
+    source_image  = local.default_vars.default_cos_image  # Container-Optimised OS
+    labels = {
+      created_by = "terraform"
+    }
+  }
+
+  network_interface {
+    network = google_compute_network.terraform-network-for-each.name
+    subnetwork = google_compute_subnetwork.for-each-subnets["europe-west1"].name
+    # Subnet in europe-west1
+
+    access_config {
+      // Ephemeral public IP
+      network_tier="STANDARD"
+    }
+  }
+  /*
+  Even though we are setting metadata here, the gce-container-declaration seems to be
+  ignored here. We will provide it in the Google Compute Instance Manager
+  */
+  metadata = {
+    gce-container-declaration =<<EOT
+      spec:
+        containers:
+          - image: ${local.docker_image}
+            name: calculator
+            securityContext:
+              privileged: false
+            stdin: false
+            tty: false
+            restartPolicy: Always
+      EOT
+  }
+
+  service_account {
+    scopes = ["cloud-platform"]
+  }
+}

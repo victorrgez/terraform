@@ -11,6 +11,7 @@ locals {
         "default_disk_size" = 100
         "default_machine_type" = "n1-standard-1"
         "default_ubuntu_image" = "ubuntu-1804-bionic-v20221018"
+        "default_cos_image" = "cos-cloud/cos-stable-101-17162-40-20"
     })
 
     /*

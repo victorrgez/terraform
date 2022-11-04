@@ -4,8 +4,7 @@ For instance, we cannot provide roles to Service Accounts. Those blocks were tes
 
 
 To Do:
-- [ ] Create instance template and Managed Instance Group (group manager, target pool)
-- [ ] Set up Load Balancer (autoscaler)
+- [ ] Set up Load Balancer and target pool
 - [ ] Deploy image on CloudRun
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
@@ -31,6 +30,7 @@ Done:
 - [X] Copy image from Dockerhub to Container Registry inside start-up script
 - [X] Check how to fix startup script to run Docker image
 - [X] Create VM with container-optimised OS
+- [X] Create instance template and Managed Instance Group (group manager, autoscaler)
 - [X] ....
 
 Limitations of the A Cloud Guru Playground and Terraform:
