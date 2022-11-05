@@ -4,8 +4,10 @@ For instance, we cannot provide roles to Service Accounts. Those blocks were tes
 
 
 To Do:
-- [ ] Set up Load Balancer and target pool
+- [ ] Set up TCP Load Balancer and backend service
+- [ ] Comment migs_and_loadbalancers.tf
 - [ ] Deploy image on CloudRun
+- [ ] Create LoadBalancer for GCS
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
 - [ ] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
