@@ -46,7 +46,7 @@ resource "google_compute_instance" "terraform-vm" {
 
   network_interface {
     network = google_compute_network.terraform-network-for-each.name
-    subnetwork = google_compute_subnetwork.for-each-subnets["europe-west1"].name
+    subnetwork = google_compute_subnetwork.for-each-subnets[local.region].name
     # Subnet in europe-west1
 
     access_config {
@@ -90,7 +90,7 @@ resource "google_compute_instance" "docker-vm" {
 
   network_interface {
     network = google_compute_network.terraform-network-for-each.name
-    subnetwork = google_compute_subnetwork.for-each-subnets["europe-west1"].name
+    subnetwork = google_compute_subnetwork.for-each-subnets[local.region].name
     # Subnet in europe-west1
 
     access_config {
@@ -131,7 +131,7 @@ resource "google_compute_instance" "docker-optimised-vm" {
 
   network_interface {
     network = google_compute_network.terraform-network-for-each.name
-    subnetwork = google_compute_subnetwork.for-each-subnets["europe-west1"].name
+    subnetwork = google_compute_subnetwork.for-each-subnets[local.region].name
     # Subnet in europe-west1
 
     access_config {
@@ -194,7 +194,7 @@ resource "google_compute_instance_template" "mig-template" {
 
   network_interface {
     network = google_compute_network.terraform-network-for-each.name
-    subnetwork = google_compute_subnetwork.for-each-subnets["europe-west1"].name
+    subnetwork = google_compute_subnetwork.for-each-subnets[local.region].name
     # Subnet in europe-west1
 
     access_config {
