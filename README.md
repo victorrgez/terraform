@@ -4,12 +4,11 @@ For instance, we cannot provide roles to Service Accounts. Those blocks were tes
 
 
 To Do:
-- [ ] Add Proxy only subnet
+- [ ] Make GCS bucket public for LB to work
 - [ ] Comment migs_and_loadbalancers.tf
 - [ ] Understand more in depth all the component of migs_and_loadbalancers. Url map, proxy, etc..
-- [ ] Firewall on Mig allow only from LB
 - [ ] Deploy image on CloudRun
-- [ ] Create LoadBalancer for GCS
+- [ ] Create DNS record for Load Balancer
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
 - [ ] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
@@ -39,8 +38,10 @@ Done:
 - [X] Create VM with container-optimised OS
 - [X] Create instance template and Managed Instance Group (group manager, autoscaler)
 - [X] Set up HTTP Load Balancer and backend service
-- [X] Add Frontend to Load Balancer?
-
+- [X] Add Frontend to Load Balancer (Forwarding rule)
+- [X] Add Proxy only subnet
+- [X] Firewall on Mig allow only from LB
+- [X] Create LoadBalancer for GCS
 - [X] ....
 
 Limitations of the A Cloud Guru Playground and Terraform:

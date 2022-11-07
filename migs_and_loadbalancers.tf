@@ -24,7 +24,7 @@ resource google_compute_region_health_check "http-health-check-5000" {
   }
 }
 
-resource "google_compute_instance_group_manager" "mig-calculator" {
+resource google_compute_instance_group_manager "mig-calculator" {
   name = "mig-calculator"
   provider = google-beta
 
@@ -100,7 +100,7 @@ resource google_compute_region_backend_service "backend-calculator" {
   }
 }
 
-resource "google_compute_region_url_map" "loadbalancer-urlmap" {
+resource google_compute_region_url_map "loadbalancer-urlmap" {
   name        = "loadbalancer-urlmap"
 
   default_service = google_compute_region_backend_service.backend-calculator.id
@@ -114,7 +114,7 @@ resource "google_compute_region_url_map" "loadbalancer-urlmap" {
     name            = "allpaths"
     default_service = google_compute_region_backend_service.backend-calculator.id
 
-    path_rule {
+    path_rule {  # Not needed. We can use it for specifying different backend depending on the path
       paths   = ["/*"]
       service = google_compute_region_backend_service.backend-calculator.id
     }
@@ -122,13 +122,13 @@ resource "google_compute_region_url_map" "loadbalancer-urlmap" {
 
 }
 
-resource "google_compute_region_target_http_proxy" "loadbalancer-calculator" {
+resource google_compute_region_target_http_proxy "loadbalancer-calculator" {
   name            = "loadbalancer-calculator"
   url_map         = google_compute_region_url_map.loadbalancer-urlmap.id
   description     = "Listens on port 80 and load balances against port 5000 of the Managed Instance Group"
 }
 
-resource "google_compute_forwarding_rule" "frontend-load-balancer" {
+resource google_compute_forwarding_rule "frontend-load-balancer" {
   name                  = "frontend-load-balancer"
   # provider              = google-beta
   region                = local.region
@@ -141,4 +141,52 @@ resource "google_compute_forwarding_rule" "frontend-load-balancer" {
   network               = google_compute_network.terraform-network-for-each.name
   network_tier          = "STANDARD"
   depends_on            = [google_compute_subnetwork.for-each-proxy-only-subnet]
+}
+
+/*
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+*/
+
+resource google_compute_backend_bucket "gcs-lb-backend" {
+  name        = "gcs-lb-backend"
+  description = "Contains ml datasets"
+  bucket_name = google_storage_bucket.terraform-trial-europe-west1-1.name
+  enable_cdn  = false
+}
+
+resource google_compute_url_map "gcs-lb-urlmap" {
+  name        = "gcs-lb-urlmap"
+
+  default_service = google_compute_backend_bucket.gcs-lb-backend.id
+
+  host_rule {
+    hosts = ["*"]
+    path_matcher = "allpaths"
+  }
+
+  path_matcher {
+    name            = "allpaths"
+    default_service = google_compute_backend_bucket.gcs-lb-backend.id
+  }
+
+}
+
+resource google_compute_target_http_proxy "gcs-lb-http-proxy" {
+  name            = "gcs-lb-http-proxy"
+  url_map         = google_compute_url_map.gcs-lb-urlmap.id
+  description     = "Serves GCS bucket with ML datasets"
+}
+
+resource google_compute_global_forwarding_rule "gcs-lb-frontend" {
+  name                  = "gcs-lb-frontend"
+  # provider              = google-beta
+  ip_protocol           = "TCP"
+  ip_address            = google_compute_global_address.gcs-lb-static-ip.id
+  load_balancing_scheme = "EXTERNAL_MANAGED"
+  port_range            = "80"
+  target                = google_compute_target_http_proxy.gcs-lb-http-proxy.id
+  # Only for internal LB but, if we do not specify network, it tries to look for default network:
+  #network               = google_compute_network.terraform-network-for-each.name
+  #depends_on            = [google_compute_subnetwork.for-each-proxy-only-subnet]
 }
