@@ -38,3 +38,13 @@ variable "vpc_internal_ip_ranges" {
         ]
     }
 }
+
+variable "health_check_ip_ranges"{
+    type = list(string)
+    default = [
+        "35.191.0.0/16",
+        "130.211.0.0/22",
+        "209.85.152.0/22",
+        "209.85.204.0/22"
+    ]
+}

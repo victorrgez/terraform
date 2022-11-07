@@ -168,7 +168,7 @@ resource "google_compute_instance_template" "mig-template" {
   name        = "mig-template"
   description = "Exposes Artifact Registry image on port 5000. Used to create a Managed Instance Group"
 
-  tags = ["http-server", "https-server", "ingress5000", "ingress8000", "allow-ssh", "allow-icmp"]
+  tags = ["lbonly-ingress5000", "allow-ssh", "allow-icmp"]
 
   labels = {
     created_by = "terraform"

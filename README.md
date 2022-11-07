@@ -7,6 +7,7 @@ To Do:
 - [ ] Add Proxy only subnet
 - [ ] Comment migs_and_loadbalancers.tf
 - [ ] Understand more in depth all the component of migs_and_loadbalancers. Url map, proxy, etc..
+- [ ] Firewall on Mig allow only from LB
 - [ ] Deploy image on CloudRun
 - [ ] Create LoadBalancer for GCS
 - [ ] How to create/choose workspace

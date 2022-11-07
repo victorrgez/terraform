@@ -140,4 +140,5 @@ resource "google_compute_forwarding_rule" "frontend-load-balancer" {
   # Only for internal LB but, if we do not specify network, it tries to look for default network:
   network               = google_compute_network.terraform-network-for-each.name
   network_tier          = "STANDARD"
+  depends_on            = [google_compute_subnetwork.for-each-proxy-only-subnet]
 }

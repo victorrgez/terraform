@@ -44,7 +44,7 @@ resource "google_compute_firewall" "ingress5000" {
   project     = local.project_id
   name        = "ingress5000"
   network     = google_compute_network.terraform-network-for-each.name
-  description = "Open flask's default port"
+  description = "Open flask's default port for everyone"
   
   allow {
     protocol  = "tcp"
@@ -55,6 +55,28 @@ resource "google_compute_firewall" "ingress5000" {
   priority = 1000
   source_ranges = ["0.0.0.0/0"]
   target_tags = ["ingress5000"]
+}
+
+resource "google_compute_firewall" "lbonly-ingress5000" {
+  # Source range is only Load Balancer
+  project     = local.project_id
+  name        = "lbonly-ingress5000"
+  network     = google_compute_network.terraform-network-for-each.name
+  description = "Open flask's default port for Load Balancer IP only"
+  
+  allow {
+    protocol  = "tcp"
+    ports     = ["5000"]
+  }
+
+  direction   = "INGRESS"
+  priority = 1000
+  /* Need to allow healthcheck ip ranges https://cloud.google.com/load-balancing/docs/health-check-concepts#ip-ranges
+  as well as the proxy-only subnet access.
+  No need to include the static IP of the load balancer as the termination on the client is terminated
+  "${google_compute_address.load-balancer-static-ip.address}/32" */
+  source_ranges = flatten([var.health_check_ip_ranges, google_compute_subnetwork.for-each-proxy-only-subnet.ip_cidr_range])
+  target_tags = ["lbonly-ingress5000"]
 }
 
 resource "google_compute_firewall" "ingress8000" {
