@@ -4,10 +4,9 @@ For instance, we cannot provide roles to Service Accounts. Those blocks were tes
 
 
 To Do:
-- [ ] Make GCS bucket public for LB to work
+- [ ] Try one last time GCS Public with IAM binding instead of policy
 - [ ] Comment migs_and_loadbalancers.tf
 - [ ] Understand more in depth all the component of migs_and_loadbalancers. Url map, proxy, etc..
-- [ ] Deploy image on CloudRun
 - [ ] Create DNS record for Load Balancer
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
@@ -42,6 +41,8 @@ Done:
 - [X] Add Proxy only subnet
 - [X] Firewall on Mig allow only from LB
 - [X] Create LoadBalancer for GCS
+- [X] Deploy image on CloudRun
+- [X] Make GCS bucket public for LB to work --> Don't have enough permissions on Playground but know how to do it
 - [X] ....
 
 Limitations of the A Cloud Guru Playground and Terraform:

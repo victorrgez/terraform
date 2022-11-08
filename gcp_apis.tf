@@ -19,3 +19,13 @@ resource "google_project_service" "artifact-registry-api" {
   disable_on_destroy = true
   disable_dependent_services = true
 }
+
+resource "google_project_service" "cloud-run-api" {
+  service = "run.googleapis.com"
+  timeouts {
+    create = "1m"
+    update = "1m"
+  }
+  disable_on_destroy = true
+  disable_dependent_services = true
+}
