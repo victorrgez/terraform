@@ -4,17 +4,13 @@ For instance, we cannot provide roles to Service Accounts. Those blocks were tes
 
 
 To Do:
-- [ ] Try one last time GCS Public with IAM binding instead of policy
-- [ ] Comment migs_and_loadbalancers.tf
-- [ ] Understand more in depth all the component of migs_and_loadbalancers. Url map, proxy, etc..
-- [ ] Create DNS record for Load Balancer
 - [ ] How to create/choose workspace
 - [ ] What is exactly terraform module
-- [ ] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
 - [ ] Data sources
 
 Done:
 
+- [X] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
 - [X] Enable APIs
 - [X] Create VM
 - [X] Created GCS buckets
@@ -43,6 +39,7 @@ Done:
 - [X] Create LoadBalancer for GCS
 - [X] Deploy image on CloudRun
 - [X] Make GCS bucket public for LB to work --> Don't have enough permissions on Playground but know how to do it
+- [X] Understand more in depth all the component of migs_and_loadbalancers. Url map, proxy, etc..
 - [X] ....
 
 Limitations of the A Cloud Guru Playground and Terraform:
@@ -53,3 +50,5 @@ since they both need to be active for Terraform to know if they are active or no
 - It can take some time for Artifact Registry API to be initialised before the image can be pushed. Therefore, the initialization script of `google_compute_instance.terraform-vm` may fail.
 
 - There is currently not a straightforward way of running VMs optimised for containers with Terraform as it can be done on UI, gcloud, etc (https://cloud.google.com/compute/docs/containers/deploying-containers). Therefore, we have created our own initialization script.
+
+- Cannot create a temporary Domain in order to associate it with the Load Balancer

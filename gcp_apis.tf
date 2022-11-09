@@ -21,6 +21,7 @@ resource "google_project_service" "artifact-registry-api" {
 }
 
 resource "google_project_service" "cloud-run-api" {
+  # Needed for deploying Cloud Run services
   service = "run.googleapis.com"
   timeouts {
     create = "1m"

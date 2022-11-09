@@ -1,3 +1,37 @@
+/*
+In order to deploy a Load Balancer with an instance group we need the following resources:
+
+-Instance template with either a start-up script or with a container optimised boot image plus an image in Artifact Registry --> Available in vms.tf
+
+-Health checks --> Both regional and global. We will need a healthcheck in the same region as the backend service, however; if we have a regional
+                   load balancer and mig, we still need a global health check so that the MIG's autohealing works properly
+
+-Instance Group Manager --> Defines the MIG. If using COS, we need to pass the image information directly here instead of in the
+                            instance template. If not using autoscaler, need to provide the target number of VMs as well. Need to specify NAMED PORT!
+
+-Autoscaler --> Minimum and maximum number of replicas and autoscaling policies for the MIG
+
+-Backend service --> Configure the MIG to be a backend for LoadBalancers in a specific region/globally and which kind of protocol it will use
+
+-URL-map --> Same load balancer with same IP can send different routes to different backend services (and/or to different hosts)
+
+-HTTP-proxy --> Functionality bounded to an URL-MAP. Handles the conneciiton part.
+                Terminates a connection from LB and opens a new one to the backend service.
+                Several LB can use the same proxy to use a specific URL map.
+                It is important to have a proxy-only subnet in your network
+
+-Static-IP --> Important to always have the same IP in your Load Balancer so that you can configure a Domain in order for your customers (or internal service) to
+               be able to access your Load Balancer reliably through the Domain Name.
+
+-Forwarding Rule --> The Load Balancer itself. Uses a protocol, IP, target(http proxy for example) and is based in a region. Connects everything described above.
+
+Additional details:
+
+·There are many types of Load Balancers and the use case needs to be studied thoroughly (TCP, SSL, Internal, etc)
+·Cloud Armor can be attached as a WAF (Web Application Firewall)
+·Named port from MING (port_name in backend service) is the port that LB will use to comunicate with MIG, wheras we will use port-range to access LB
+*/
+
 resource google_compute_health_check "global-http-health-check-5000" {
   /* Autohealing requires that we create a global health check for the MIG
   even if it is a regional resource */
@@ -145,8 +179,10 @@ resource google_compute_forwarding_rule "frontend-load-balancer" {
 
 /*
 ------------------------------------------------------------------------
+This is how we can deploy a Load Balancer with GCS (we need to give
+public access to the bucket too):
 ------------------------------------------------------------------------
-*/
+
 
 resource google_compute_backend_bucket "gcs-lb-backend" {
   name        = "gcs-lb-backend"
@@ -190,3 +226,4 @@ resource google_compute_global_forwarding_rule "gcs-lb-frontend" {
   #network               = google_compute_network.terraform-network-for-each.name
   #depends_on            = [google_compute_subnetwork.for-each-proxy-only-subnet]
 }
+*/
