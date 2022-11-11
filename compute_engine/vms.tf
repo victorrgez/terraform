@@ -7,11 +7,11 @@ INDEX:
 */
 
 resource "google_compute_instance" "terraform-vm" {
-  name         = "terraform-vm"
+  name         = "${terraform.workspace}-terraform-vm"
   machine_type = local.default_vars.default_machine_type
   zone         = local.zone
   # Needs the repository to be created for the start-up script to be run succesfully:
-  depends_on = [google_artifact_registry_repository.docker-repository]
+  depends_on = [var.docker_repository]
 
   tags = ["http-server", "https-server", "ingress5000", "ingress8000", "allow-ssh", "allow-icmp"]
   allow_stopping_for_update = true
@@ -45,8 +45,8 @@ resource "google_compute_instance" "terraform-vm" {
   }
 
   network_interface {
-    network = google_compute_network.terraform-network-for-each.name
-    subnetwork = google_compute_subnetwork.for-each-subnets[local.region].name
+    network = var.network
+    subnetwork = var.subnetwork
     # Subnet in europe-west1
 
     access_config {
@@ -165,7 +165,7 @@ resource "google_compute_instance" "docker-optimised-vm" {
 */
 
 resource "google_compute_instance_template" "mig-template" {
-  name        = "mig-template"
+  name        = "${terraform.workspace}-mig-template"
   description = "Exposes Artifact Registry image on port 5000. Used to create a Managed Instance Group"
 
   tags = ["lbonly-ingress5000", "allow-ssh", "allow-icmp"]
@@ -193,8 +193,8 @@ resource "google_compute_instance_template" "mig-template" {
   }
 
   network_interface {
-    network = google_compute_network.terraform-network-for-each.name
-    subnetwork = google_compute_subnetwork.for-each-subnets[local.region].name
+    network = var.network
+    subnetwork = var.subnetwork
     # Subnet in europe-west1
 
     access_config {

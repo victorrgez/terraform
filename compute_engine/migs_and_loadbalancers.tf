@@ -35,7 +35,7 @@ Additional details:
 resource google_compute_health_check "global-http-health-check-5000" {
   /* Autohealing requires that we create a global health check for the MIG
   even if it is a regional resource */
-  name = "global-http-health-check-5000"
+  name = "${terraform.workspace}-global-http-health-check-5000"
   
   timeout_sec        = 5
   check_interval_sec = 60
@@ -47,7 +47,7 @@ resource google_compute_health_check "global-http-health-check-5000" {
 }
 
 resource google_compute_region_health_check "http-health-check-5000" {
-  name = "http-health-check-5000"
+  name = "${terraform.workspace}-http-health-check-5000"
   
   timeout_sec        = 5
   check_interval_sec = 60
@@ -59,10 +59,10 @@ resource google_compute_region_health_check "http-health-check-5000" {
 }
 
 resource google_compute_instance_group_manager "mig-calculator" {
-  name = "mig-calculator"
+  name = "${terraform.workspace}-mig-calculator"
   provider = google-beta
 
-  base_instance_name = "mig-calculator"
+  base_instance_name = "${terraform.workspace}-mig-calculator"
   zone               = local.zone
 
   version {
@@ -104,7 +104,7 @@ resource google_compute_instance_group_manager "mig-calculator" {
 }
 
 resource google_compute_autoscaler "mig-autoscaler" {
-  name = "mig-autoscaler"
+  name = "${terraform.workspace}-mig-autoscaler"
   zone = local.zone
   target = google_compute_instance_group_manager.mig-calculator.id
   autoscaling_policy {
@@ -118,7 +118,7 @@ resource google_compute_autoscaler "mig-autoscaler" {
 }
 
 resource google_compute_region_backend_service "backend-calculator" {
-  name          = "backend-calculator"
+  name          = "${terraform.workspace}-backend-calculator"
   health_checks = [google_compute_region_health_check.http-health-check-5000.id]
   region = local.region
   enable_cdn    = false
@@ -135,7 +135,7 @@ resource google_compute_region_backend_service "backend-calculator" {
 }
 
 resource google_compute_region_url_map "loadbalancer-urlmap" {
-  name        = "loadbalancer-urlmap"
+  name        = "${terraform.workspace}-loadbalancer-urlmap"
 
   default_service = google_compute_region_backend_service.backend-calculator.id
 
@@ -157,13 +157,13 @@ resource google_compute_region_url_map "loadbalancer-urlmap" {
 }
 
 resource google_compute_region_target_http_proxy "loadbalancer-calculator" {
-  name            = "loadbalancer-calculator"
+  name            = "${terraform.workspace}-loadbalancer-calculator"
   url_map         = google_compute_region_url_map.loadbalancer-urlmap.id
   description     = "Listens on port 80 and load balances against port 5000 of the Managed Instance Group"
 }
 
 resource google_compute_forwarding_rule "frontend-load-balancer" {
-  name                  = "frontend-load-balancer"
+  name                  = "${terraform.workspace}-frontend-load-balancer"
   # provider              = google-beta
   region                = local.region
   ip_protocol           = "TCP"
@@ -172,9 +172,9 @@ resource google_compute_forwarding_rule "frontend-load-balancer" {
   port_range            = "80"
   target                = google_compute_region_target_http_proxy.loadbalancer-calculator.id
   # Only for internal LB but, if we do not specify network, it tries to look for default network:
-  network               = google_compute_network.terraform-network-for-each.name
+  network               = var.network
   network_tier          = "STANDARD"
-  depends_on            = [google_compute_subnetwork.for-each-proxy-only-subnet]
+  depends_on            = [var.proxy_only_subnet] # Dummy variable to propagate dependencies
 }
 
 /*

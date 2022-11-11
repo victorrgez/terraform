@@ -1,5 +1,5 @@
 resource "google_compute_disk" "boot-disk-vm" {
-    name = "boot-disk-vm"
+    name = "${terraform.workspace}-boot-disk-vm"
     type = local.default_vars.default_disk_type
     zone = local.zone
     size = 50
@@ -10,7 +10,7 @@ resource "google_compute_disk" "boot-disk-vm" {
 }
 
 resource "google_compute_disk" "terraform-additional-persistent-disk" {
-    name = "terraform-additional-persistent-disk"
+    name = "${terraform.workspace}-terraform-additional-persistent-disk"
     zone = local.zone
     type = local.default_vars.default_disk_type
     size = local.default_vars.default_disk_size
