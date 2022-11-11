@@ -5,11 +5,10 @@ For instance, we cannot provide roles to Service Accounts. Those blocks were tes
 
 To Do:
 - [ ] What is a workspace --> Isolated set of resources. Each of them is a duplication of the whole project with different lifecycle. Same codebase is used for all workspaces. Variables + Data Sources + Resources + Outputs
-- [ ] How to create/choose workspace
 - [ ] What is exactly terraform module --> Like a Class in OoP. Bundle of resources which a series of settings that will not change whilst you can still tune them a bit.
 - [ ] Data sources
 - [ ] Define custom module and instantiate it in main.tf
-- [ ] Use terraform workspace in the name of the Resources
+- [ ] Pass different variables when running terraform on command line
 
 Done:
 
@@ -43,6 +42,8 @@ Done:
 - [X] Deploy image on CloudRun
 - [X] Make GCS bucket public for LB to work --> Don't have enough permissions on Playground but know how to do it
 - [X] Understand more in depth all the component of migs_and_loadbalancers. Url map, proxy, etc..
+- [X] How to create/choose workspace
+- [X] Use terraform workspace in the name of the Resources
 - [X] ....
 
 Limitations of the A Cloud Guru Playground and Terraform:
