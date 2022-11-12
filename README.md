@@ -7,12 +7,12 @@ To Do:
 - [ ] What is a workspace --> Isolated set of resources. Each of them is a duplication of the whole project with different lifecycle. Same codebase is used for all workspaces. Variables + Data Sources + Resources + Outputs
 - [ ] What is exactly terraform module --> Like a Class in OoP. Bundle of resources which a series of settings that will not change whilst you can still tune them a bit.
 - [ ] Data sources
-- [ ] Define custom module and instantiate it in main.tf
 - [ ] Pass different variables when running terraform on command line
+- [ ] What is Istio?
 
 Done:
 
-- [X] Difference between variables and locals --> Variables cannot use functions. Variables global-scoped. Locals only within module.
+- [X] Difference between variables and locals --> Variables cannot use functions and can be overriden on the command line.
 - [X] Enable APIs
 - [X] Create VM
 - [X] Created GCS buckets
@@ -43,7 +43,9 @@ Done:
 - [X] Make GCS bucket public for LB to work --> Don't have enough permissions on Playground but know how to do it
 - [X] Understand more in depth all the component of migs_and_loadbalancers. Url map, proxy, etc..
 - [X] How to create/choose workspace
-- [X] Use terraform workspace in the name of the Resources
+- [X] Add terraform workspace in the name of the Resources
+- [X] Define custom module and instantiate it in main.tf
+- [X] Create a Data source in child module that outputs its content to root module which outputs its value to terminal
 - [X] ....
 
 Limitations of the A Cloud Guru Playground and Terraform:

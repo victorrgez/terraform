@@ -52,7 +52,7 @@ resource "google_compute_subnetwork" "array-lookup-subnets"{
   
   # count = length(variable) will create behind the scenes a for loop
   # `count.index` --> will give us the index for iterating both over our variable
-  # and also over a different list variable
+  # and also over a different variable of type list
   
 
   name          = "subnet-lookup-${local.allowed_regions[count.index]}"

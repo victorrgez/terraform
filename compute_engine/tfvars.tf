@@ -39,6 +39,10 @@ variable "subnetwork" {
     type = string
 }
 
+variable "bucket_name" {
+    type = string
+}
+
 /*
 "We don't care about the value of the following variables,
 but we need these resources to be created.
