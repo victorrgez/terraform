@@ -20,3 +20,19 @@ terraform {
   }
 
 }
+
+/*
+If we need to access the contents of the state from a different terraform project,
+we can do the following inside the other project:
+
+data "terraform_remote_state" "vpc" {
+  backend = "gcs"
+
+  config = {
+    bucket = "<BUCKET>"
+    prefix = "<PREFIX>"
+  }
+}
+
+Now we can access outputs from `data.terraform_remote_state.vpc.outputs.`
+*/
