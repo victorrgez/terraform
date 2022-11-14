@@ -1,6 +1,6 @@
 module "compute_engine" {
     source = "./compute_engine"
-    default_vars = var.default_vars
+    default_vars = local.default_vars
     available_regions = var.available_regions
     vpc_internal_ip_ranges = var.vpc_internal_ip_ranges
     project_id = local.project_id

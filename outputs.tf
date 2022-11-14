@@ -7,3 +7,7 @@ output "data-source" {
   */
   value = module.compute_engine.data-source
 }
+
+output "myvar" {
+  value = var.myvar
+}

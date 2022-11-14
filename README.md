@@ -7,8 +7,6 @@ To Do:
 - [ ] What is a workspace --> Isolated set of resources. Each of them is a duplication of the whole project with different lifecycle. Same codebase is used for all workspaces. Variables + Data Sources + Resources + Outputs
 - [ ] What is exactly terraform module --> Like a Class in OoP. Bundle of resources which a series of settings that will not change whilst you can still tune them a bit.
 - [ ] Data sources
-- [ ] Pass different variables when running terraform on command line
-- [ ] What is Istio?
 
 Done:
 
@@ -46,9 +44,15 @@ Done:
 - [X] Add terraform workspace in the name of the Resources
 - [X] Define custom module and instantiate it in main.tf
 - [X] Create a Data source in child module that outputs its content to root module which outputs its value to terminal
+- [X] Learn how to pass different variables when running terraform on command line do dynamically specifiy some contraints on the infrastructure to be created (also need to remove the `default_vars` merging with Local variables for this specification to have an effect):
+
+```tf apply -var default_vars='{"default_disk_type":"pd-ssd", "default_disk_size":79, "default_machine_type":"f1-micro"}' -var myvar="itworked"```
+
 - [X] ....
 
 Limitations of the A Cloud Guru Playground and Terraform:
+
+-Cannot give IAM permissions. This prevents us, for example, from creating a publicly accessible Load Balancer on GCS or a public Cloud Run service
 
 - We need to manually activate Service Usage and Cloud Resource Manager APIs as Terraform will have unexpected behaviour with them otherwise,
 since they both need to be active for Terraform to know if they are active or not.

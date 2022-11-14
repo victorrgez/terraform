@@ -48,3 +48,9 @@ variable "health_check_ip_ranges"{
         "209.85.204.0/22"
     ]
 }
+
+variable "myvar"{
+    # Can be passed through Terraform CLI to print it as an output
+    type = string
+    default = ""
+}
