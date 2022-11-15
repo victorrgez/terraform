@@ -4,9 +4,10 @@ For instance, we cannot provide roles to Service Accounts. Those blocks were tes
 
 
 To Do:
-- [ ] What is a workspace --> Isolated set of resources. Each of them is a duplication of the whole project with different lifecycle. Same codebase is used for all workspaces. Variables + Data Sources + Resources + Outputs
-- [ ] What is exactly terraform module --> Like a Class in OoP. Bundle of resources which a series of settings that will not change whilst you can still tune them a bit.
+
+- [ ] What is terraform module --> Like a Class in OoP. Bundle of resources with a series of settings that will not change and others that you can still tune them a bit. They only expose their outputs to their root module.
 - [ ] Data sources
+- [ ] Add template file that outputs the IPs of the MIG's instances to a local file
 
 Done:
 
@@ -45,6 +46,7 @@ Done:
 - [X] Define custom module and instantiate it in main.tf
 - [X] Create a Data source in child module that outputs its content to root module which outputs its value to terminal
 - [X] Learn how to pass different variables when running terraform on command line do dynamically specifiy some contraints on the infrastructure to be created (also need to remove the `default_vars` merging with Local variables for this specification to have an effect):
+- [X] What is a workspace --> Isolated set of resources. Each of them is a duplication of the whole project with different lifecycle. Same codebase is used for all workspaces. Variables + Data Sources + Resources + Outputs
 
 ```tf apply -var default_vars='{"default_disk_type":"pd-ssd", "default_disk_size":79, "default_machine_type":"f1-micro"}' -var myvar="itworked"```
 
