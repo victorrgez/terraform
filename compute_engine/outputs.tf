@@ -40,7 +40,7 @@ output "data-source" {
 }
 
 /*
-If we had a resource with count >1, we can output a list of the values for all instances in this way:
+If we had a terraform-vm resource with count >1, we can output a list of the values for all instances in this way:
 
 output "ips" {  # As a List
     value = [for i in google_compute_instance.terraform-vm : i.network_interface[0].access_config[0].nat_ip]

@@ -11,3 +11,12 @@ output "data-source" {
 output "myvar" {
   value = var.myvar
 }
+
+output "ips_in_use" {
+  value = local.ips_in_use
+}
+
+resource "local_file" "ip-registry" {
+    content  = templatefile("data/scripts/ip_registry.tftpl", {ips=local.ips_in_use})
+    filename = "data/ip-registry.csv"
+}
