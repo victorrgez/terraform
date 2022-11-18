@@ -23,8 +23,15 @@ resource "google_bigquery_table" "titanic" {
   deletion_protection = local.deletion_protection
   schema = file("data/bqschemas/${google_bigquery_dataset.mldataset.dataset_id}/titanic.json")
   labels = {
-    created_by = "terraform"
+    created_by = "terraform",
+    created_at = lower(replace(timestamp(),":","_"))
   }
+  lifecycle {
+    ignore_changes = [
+      labels["created_at"]
+    ]
+  }
+  # Added created_at label just for the sake of practising with TF functions and lifecycle
 }
 
 /*
