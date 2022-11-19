@@ -1,0 +1,57 @@
+# gcloud builds submit --region=europe-west1 --config cloudbuild.yaml ./
+# File could not be validated when using Secret Manager since we cannot
+# give roles to the Cloud Build SA in the ACG playground
+# We can also configure this file as a trigger for Cloud Repositories
+# so that each commit that meets some conditions triggers the build
+
+steps:
+  # Terraform init
+  - name: 'hashicorp/terraform:1.3.3'
+    id : 'terraform init'
+    entrypoint: sh
+    args:
+      - '-c'
+      - |
+        printf '%s' "$$terraform-key" > ./temp.json
+        export GOOGLE_APPLICATION_CREDENTIALS="./temp.json"
+        terraform init
+    secretEnv:
+      - terraform-key
+
+  # Terraform validate
+  - name: 'hashicorp/terraform:1.3.3'
+    id : 'terraform validate'
+    entrypoint: sh
+    args:
+      - '-c'
+      - |
+        terraform validate
+
+
+  # Terraform plan
+  - name: 'hashicorp/terraform:1.3.3'
+    id : 'terraform plan'
+    entrypoint: sh
+    args:
+      - '-c'
+      - |
+        terraform plan -var machine_type=$machine_type
+    env:
+      - 'machine_type=f1-micro'
+  
+  # Terraform apply
+  - name: 'hashicorp/terraform:1.3.3'
+    id : 'terraform apply'
+    entrypoint: sh
+    args:
+      - '-c'
+      - |
+        terraform apply -auto-approve -var machine_type=$machine_type
+        rm ./temp.json
+    env:
+      - 'machine_type=f1-micro'
+availableSecrets:
+  secretManager:
+    - versionName: >-
+        projects/playground-s-11-62c297d4/secrets/terraform-key/versions/latest
+      env: terraform-key
