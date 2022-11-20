@@ -1,5 +1,5 @@
 module "compute_engine" {
-    source = "./compute_engine"
+    source = "modules/compute_engine"
     default_vars = local.default_vars
     available_regions = var.available_regions
     vpc_internal_ip_ranges = var.vpc_internal_ip_ranges
