@@ -27,6 +27,7 @@ data "google_compute_instance" "mig-calculator-instances" {
     zone = var.zone
 }
 
+/*
 output "mig-ips" {
   value = {for i in data.google_compute_instance.mig-calculator-instances:  i.name => i.network_interface[0].access_config[0].nat_ip}
 }
@@ -34,6 +35,7 @@ output "mig-ips" {
 output "vm-ip" {
   value = {"${google_compute_instance.terraform-vm.name}" = "${google_compute_instance.terraform-vm.network_interface[0].access_config[0].nat_ip}"}
 }
+*/
 
 output "data-source" {
   value = data.google_storage_bucket_object_content.data-source.content

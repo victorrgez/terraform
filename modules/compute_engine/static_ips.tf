@@ -12,7 +12,9 @@ resource "google_compute_address" "load-balancer-static-ip"{
     network_tier = "STANDARD"
 }
 
+/*
 resource "google_compute_global_address" "gcs-lb-static-ip"{
     name = "${terraform.workspace}-gcs-lb-static-ip"
     address_type = "EXTERNAL"
 }
+*/
