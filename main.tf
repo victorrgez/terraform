@@ -1,5 +1,5 @@
 module "compute_engine" {
-    source = "modules/compute_engine"
+    source = "./modules/compute_engine"
     default_vars = local.default_vars
     available_regions = var.available_regions
     vpc_internal_ip_ranges = var.vpc_internal_ip_ranges
@@ -20,3 +20,17 @@ module "compute_engine" {
     proxy_only_subnet = google_compute_subnetwork.for-each-proxy-only-subnet.creation_timestamp
     docker_repository = google_artifact_registry_repository.docker-repository.create_time
 }
+
+
+/*
+module "gke" {
+    source = "./modules/gke"
+    zone = local.zone
+    node-count = 1
+    machine-type="g1-small"  # f1-micro is not supported because of OoM
+    cluster-name="sample-gke"
+    depends_on = [google_project_service.gke]
+    network = google_compute_network.terraform-network-for-each.name
+    subnetwork = google_compute_subnetwork.for-each-subnets[local.region].name
+}
+*/

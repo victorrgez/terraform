@@ -20,6 +20,17 @@ resource "google_project_service" "artifact-registry-api" {
   disable_dependent_services = true
 }
 
+resource "google_project_service" "gke" {
+  service = "container.googleapis.com"
+  # Needed for creating GKE clusters
+  timeouts {
+    create = "1m"
+    update = "1m"
+  }
+  disable_on_destroy = true
+  disable_dependent_services = true
+}
+
 /*
 resource "google_project_service" "cloud-build-api" {
   service = "cloudbuild.googleapis.com"

@@ -26,5 +26,5 @@ locals {
     
     docker_image = "${local.region}-docker.pkg.dev/${local.project_id}/docker-repository/learningcicd:1"
 
-    ips_in_use = merge(module.compute_engine.mig-ips, module.compute_engine.vm-ip)
+    # ips_in_use = merge(module.compute_engine.mig-ips, module.compute_engine.vm-ip)
 }
