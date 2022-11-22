@@ -5,13 +5,13 @@ For instance, we cannot provide roles to Service Accounts. Those blocks were tes
 
 To Do:
 
-- [ ] What is terraform module --> Like a Class in OoP. Bundle of resources with a series of settings that will not change and others that you can still tune them a bit. They only expose their outputs to their root module.
-- [ ] Data sources
+
 - [ ] Deploy pod to GKE
+- [ ] Understand a bit about Hashicorp Stack (there are specific providers for each of them in most cases) --> Vault (Secret Management) - Consul (service discovery, centralised configuration as source of truth for services, service-base access control, remote state backend) - Nomad (application orchestration platform, even some cannot be containerised) - Packer (Image Management, available as data source) - Sentinel (org policies) 
 
 Done:
 
-- [X] Difference between variables and locals --> Variables cannot use functions and can be overriden on the command line.
+- [X] Difference between variables and locals --> Variables cannot use functions and can be overriden on the command line (or we can maintain their default value). Locals are like drafts for building up complex variables as a result (their source can be the variables)
 - [X] Enable APIs
 - [X] Create VM
 - [X] Created GCS buckets
@@ -47,8 +47,9 @@ Done:
 - [X] Create a Data source in child module that outputs its content to root module which outputs its value to terminal
 - [X] Learn how to pass different variables when running terraform on command line do dynamically specifiy some contraints on the infrastructure to be created (also need to remove the `default_vars` merging with Local variables for this specification to have an effect):
 - [X] What is a workspace --> Isolated set of resources. Each of them is a duplication of the whole project with different lifecycle. Same codebase is used for all workspaces. Variables + Data Sources + Resources + Outputs
+- [X] What is terraform module --> Like a Class in OoP. Bundle of resources with a series of settings that will not change and others that you can still tune them a bit. They only expose their outputs to their root module.
 - [X] Add template file that outputs the IPs of the MIG's instances to a local file
-- [X] Understand Terraform Workspaces vs Terraform Modules vs Branches in Development vs Production scenario
+- [X] Understand (Terraform Workspaces vs Terraform Modules vs Branches) in (Development vs Production) scenario
 - [X] Create GKE cluster module
 
 ```tf apply -var default_vars='{"default_disk_type":"pd-ssd", "default_disk_size":79, "default_machine_type":"f1-micro"}' -var myvar="itworked"```
@@ -67,3 +68,5 @@ since they both need to be active for Terraform to know if they are active or no
 - There is currently not a straightforward way of running VMs optimised for containers with Terraform as it can be done on UI, gcloud, etc (https://cloud.google.com/compute/docs/containers/deploying-containers). Therefore, we have created our own initialization script.
 
 - Cannot create a temporary Domain in order to associate it with the Load Balancer
+
+- Cannot use Cloud Source Repositories to trigger Cloud Build
