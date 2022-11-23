@@ -4,7 +4,7 @@ terraform {
   # ~> means approximately greater than (the last digit can change)
   required_version = "~>1.3.3"
   backend "gcs" {
-    bucket = "terraform-victorrgez"
+    bucket = "terraform-victorrgez1"
     prefix = "terraform-trial1"
 
   }

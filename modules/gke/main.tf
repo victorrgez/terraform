@@ -35,3 +35,16 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     }
   }
 }
+
+output "cluster-name" {
+  value = google_container_cluster.gke-cluster.name
+}
+
+output "endpoint" {
+  value = google_container_cluster.gke-cluster.endpoint
+}
+
+output "ca_cert" {
+  sensitive = true
+  value = google_container_cluster.gke-cluster.master_auth.0.cluster_ca_certificate
+}
