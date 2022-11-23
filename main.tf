@@ -33,4 +33,13 @@ module "gke" {
     network = google_compute_network.terraform-network-for-each.name
     subnetwork = google_compute_subnetwork.for-each-subnets[local.region].name
 }
+
+module "gke-app" {
+    source = "./modules/gke-app"
+    cluster_name = module.gke.cluster-name
+    endpoint = module.gke.endpoint
+    ca_cert = module.gke.ca_cert
+    location = local.zone
+    image = local.docker_image
+}
 */
