@@ -49,7 +49,14 @@ keep their default value). Locals are like drafts for building up complex variab
 - [X] Create GKE cluster module
 - [X] Deploy pod to GKE as a deployment
 - [X] Create a service for the deployment
-- [X] Understand a bit about Hashicorp Stack (there are specific providers for each of them in most cases) --> HashiCorp Cloud Platform (managed Harshicorp services), Terraform Cloud (remote state backend, workflow approval, costs estimation and downstream triggers), Vault (Secret Management, Secret Engines (one-time tokens like Oauth), etc) - Consul (service discovery, centralised configuration as source of truth for services, service-base access control, remote state backend) - Nomad (application orchestration platform, even some cannot be containerised) - Packer (Image Management, available as data source) - Sentinel (org policies) 
+- [X] Understand a bit about Hashicorp Stack (there are specific providers for each of them in most cases) -->
+    - HashiCorp Cloud Platform (managed Harshicorp services)
+    - Terraform Cloud (remote state backend, workflow approval, costs estimation and downstream triggers)
+    - Vault (Secret Management, Secret Engines (one-time tokens like Oauth), etc)
+    - Consul (service discovery, centralised configuration as source of truth for services, service-base access control, remote state backend)
+    - Nomad (application orchestration platform, even some cannot be containerised)
+    - Packer (Image Management, available as data source)
+    - Sentinel (org policies) 
 - [X] ....
 
 Limitations of the A Cloud Guru Playground and Terraform:
