@@ -25,6 +25,7 @@ keep their default value). Locals are like drafts for building up complex variab
 - [X] Copy image from Dockerhub to Container Registry inside start-up script of a VM
 - [X] Check how to fix startup script to run Docker image
 - [X] Create VM with container-optimised OS
+- [X] Pass environment variables to VM with container-optimised OS (mongo_db_on_cos_vm.tf)
 - [X] Create instance template and Managed Instance Group (group manager, autoscaler)
 - [X] Set up HTTP Load Balancer and backend service
 - [X] Add Frontend to Load Balancer (Forwarding rule)
